@@ -1,6 +1,6 @@
 ﻿namespace BusinessObject
 {
-    public class Class1
+    public class MemberObject
     {
 
     }
