@@ -7,10 +7,18 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Repository
 {
-    public class MemberRepository : MemberRepository
+    public class MemberRepository : IMemberRepository
     {
-        void InsertMember(MemberObject member)=>MemberDAO.Instance.AddNewmember(member);
-        void UpdateMember(MemberObject member) => MemberDAO.Instance.UpdateMember(member);
-        void DeleteMember(int memberID)=> MemberDAO.Instance.RemoveMember(memberID);
+        //Add implement function here
+
+        //implement DeleteMember function
+        public void DeleteMember(int memberID)=> MemberDAO.Instance.RemoveMember(memberID);
+        //-----------------------------------------------------------------------------------
+        //implement InsertMember function
+        public void InsertMember(MemberObject member) => MemberDAO.Instance.AddNewmember(member);
+        //-----------------------------------------------------------------------------------g
+        //implement UpdateMember function
+        public void UpdateMember(MemberObject member) => MemberDAO.Instance.UpdateMember(member);
+        //-----------------------------------------------------------------------------------
     }
 }

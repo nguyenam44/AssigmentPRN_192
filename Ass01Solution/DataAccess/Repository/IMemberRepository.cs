@@ -9,8 +9,14 @@ namespace DataAccess.Repository
 {
     public interface IMemberRepository
     {
+        // Add InsertMember to interface
         void InsertMember(MemberObject member);
+        //--------------------------------------
+        // Add UpdateMember to interface
         void UpdateMember(MemberObject member);
+        //--------------------------------------
+        // Add DeleteMember to interface
         void DeleteMember(int memberID);
+        //--------------------------------------
     }
 }
