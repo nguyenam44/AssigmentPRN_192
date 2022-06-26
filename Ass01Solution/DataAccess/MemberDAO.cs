@@ -11,7 +11,7 @@ namespace DataAccess
         //Init Members list
         private static List<MemberObject> MemberList = new List<MemberObject>
         {
-            //Add code here
+            //Add list of member here
         };
         //--------------------------------------------------------------------------------
         // SingletonPattern
@@ -24,9 +24,12 @@ namespace DataAccess
             {
                 lock(instanceLock)
                 {
-                    instance = new MemberDAO();
+                    if(instance == null)
+                    {
+                        instance = new MemberDAO();
+                    }
+                    return instance;
                 }
-                return instance;
             }
         }
         //--------------------------------------------------------------------------------
