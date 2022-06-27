@@ -17,6 +17,9 @@ namespace DataAccess
             new MemberObject{MemberID = 4, MemberName = "NamNguyen", Email = "namnvhse150925@fpt.edu.vn", City = "Ho Chi Minh", Country = "Viet Nam", Password = "nam123"},
             new MemberObject{MemberID = 5, MemberName = "NghiaLe", Email = "nghialhse150939@fpt.edu.vn", City = "Ho Chi Minh", Country = "Viet Nam", Password = "nghia123"}
         };
+
+
+
         //--------------------------------------------------------------------------------
         // SingletonPattern
         private static MemberDAO instance = null;
@@ -26,9 +29,9 @@ namespace DataAccess
         {
             get
             {
-                lock(instanceLock)
+                lock (instanceLock)
                 {
-                    if(instance == null)
+                    if (instance == null)
                     {
                         instance = new MemberDAO();
                     }
@@ -43,7 +46,6 @@ namespace DataAccess
         //Get Member by ID
         public MemberObject GetMemberByID(int memberID)
         {
-            MemberObject member = null;
             MemberObject member = MemberList.SingleOrDefault(pro => pro.MemberID == memberID);
             return member;
         }
@@ -51,71 +53,82 @@ namespace DataAccess
         //GetMember by Name
         public MemberObject GetMemberByName(String memberName)
         {
-            MemberObject member = null;
             MemberObject member = MemberList.SingleOrDefault(pro => pro.MemberName == memberName);
             return member;
+        }
+        //GetMember by City and Country
+        public List<MemberObject> GetMemberByCityAndCountry(string city,string country)
+        {
+            List<MemberObject> memberList = new List<MemberObject>();
+            for (int i = 1; i <= MemberList.Count; i++)
+            {
+                if(MemberList[i-1].City == city && MemberList[i-1].Country == country) { memberList.Add(MemberList[i-1]); }
+            }
+            return memberList;
+        }
 
-        //--------------------------------------------------------------------------------
-        //Get Member by City or County
+            //--------------------------------------------------------------------------------
+            //Get Member by City or County
 
         //--------------------------------------------------------------------------------
         //Creat a new Member
-        public void AddNewmember(MemberObject member)
-        {
-            MemberObject obj = GetMemberByID(member.MemberID);
-            if (obj == null)
+            public void AddNewMember(MemberObject member)
             {
-                MemberList.Add(member);
+                MemberObject obj = GetMemberByID(member.MemberID);
+                if (obj == null)
+                {
+                    MemberList.Add(member);
+                }
+                else
+                {
+                    throw new Exception("Member already exsitsed!");
+                }
             }
-            else
+            //--------------------------------------------------------------------------------
+            //Remove a Member
+            public void RemoveMember(int MemberID)
             {
-                throw new Exception("Member already exsitsed!");
+                MemberObject obj = GetMemberByID(MemberID);
+                if (obj != null)
+                {
+                    MemberList.Remove(obj);
+                }
+                else
+                {
+                    throw new Exception("Member does not exsits!");
+                }
             }
-        }
-        //--------------------------------------------------------------------------------
-        //Remove a Member
-        public void RemoveMember(int MemberID)
-        {
-            MemberObject obj = GetMemberByID(MemberID);
-            if(obj != null)
+            //--------------------------------------------------------------------------------
+            //Update a Member
+            public void UpdateMember(MemberObject member)
             {
-                MemberList.Remove(obj);
+                MemberObject obj = GetMemberByID(member.MemberID);
+                if (obj != null)
+                {
+                    var index = MemberList.IndexOf(obj);
+                    MemberList[index] = member;
+                }
+                else
+                {
+                    throw new Exception("Member does not exsits!");
+                }
             }
-            else
+            //--------------------------------------------------------------------------------
+            //Delete a Member
+            public void deleteMember(int MemberID)
             {
-                throw new Exception("Member does not exsits!");
+                MemberObject mem = GetMemberByID(MemberID);
+                if (mem != null)
+                {
+                    MemberList.Remove(mem);
+                }
+                else
+                {
+                    throw new Exception("Member does not exists!");
+                }
             }
-        }
-        //--------------------------------------------------------------------------------
-        //Update a Member
-        public void UpdateMember(MemberObject member)
-        {
-            MemberObject obj = GetMemberByID(member.MemberID);
-            if (obj != null)
-            {
-                var index = MemberList.IndexOf(obj);
-                MemberList[index] = member;
-            }
-            else
-            {
-                throw new Exception("Member does not exsits!");
-            }
-        }
-        //--------------------------------------------------------------------------------
-        //Delete a Member
-        public void deleteMember(int MemberID)
-        {
-            MemberObject mem = GetMemberByID(MemberID);
-            if(mem != null)
-            {
-                MemberList.Remove(mem);
-            }
-            else
-            {
-                throw new Exception("Member does not exists!");
-            }
-        }
+
         
 
-    }//MemberDAO class end 
-}//DataAccess namespace end
+        }//MemberDAO class end 
+    }//DataAccess namespace en
