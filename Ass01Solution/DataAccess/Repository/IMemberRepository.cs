@@ -22,5 +22,6 @@ namespace DataAccess.Repository
         MemberObject GetMemberByID(int memberID);
         MemberObject GetMemberByName(string memberName);
         List<MemberObject> GetMemberByCityAndCountry(string country,string city);
+
     }
 }
