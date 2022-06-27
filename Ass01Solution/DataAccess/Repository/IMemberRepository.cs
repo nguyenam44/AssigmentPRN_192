@@ -20,6 +20,6 @@ namespace DataAccess.Repository
         //--------------------------------------
         //Search Member By ID and Name
         MemberObject GetMemberByID(int memberID);
-        MemberObject GetMemberByName(String memberName)
+        MemberObject GetMemberByName(String memberName);
     }
 }
