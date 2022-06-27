@@ -43,7 +43,6 @@ namespace DataAccess
         //Get Member by ID
         public MemberObject GetMemberByID(int memberID)
         {
-            MemberObject member = null;
             MemberObject member = MemberList.SingleOrDefault(pro => pro.MemberID == memberID);
             return member;
         }
@@ -51,10 +50,9 @@ namespace DataAccess
         //GetMember by Name
         public MemberObject GetMemberByName(String memberName)
         {
-            MemberObject member = null;
             MemberObject member = MemberList.SingleOrDefault(pro => pro.MemberName == memberName);
             return member;
-
+        }
         //--------------------------------------------------------------------------------
         //Get Member by City or County
 
@@ -103,7 +101,7 @@ namespace DataAccess
         }
         //--------------------------------------------------------------------------------
         //Delete a Member
-        public void deleteMember(int MemberID)
+        public void DeleteMember(int MemberID)
         {
             MemberObject mem = GetMemberByID(MemberID);
             if(mem != null)
