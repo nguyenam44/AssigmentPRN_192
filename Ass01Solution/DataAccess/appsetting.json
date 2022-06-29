@@ -1,6 +1,6 @@
 {
   "ConnectionStrings": {
-    "MyStoreDB": "Server=(local);uid=sa;pwd=123;database=MyStore"
+    "MyStoreDB": "Server=(local);uid=sa;pwd=123456;database=MyStore"
   }
   "Default Account": {
     "Email": "admin@fstore.com",
