@@ -73,20 +73,6 @@ namespace DataAccess
             }
         }
         //--------------------------------------------------------------------------------
-        //Remove a Member
-        public void RemoveMember(int MemberID)
-        {
-            MemberObject obj = GetMemberByID(MemberID);
-            if(obj != null)
-            {
-                MemberList.Remove(obj);
-            }
-            else
-            {
-                throw new Exception("Member does not exsits!");
-            }
-        }
-        //--------------------------------------------------------------------------------
         //Update a Member
         public void UpdateMember(MemberObject member)
         {
