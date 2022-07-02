@@ -26,10 +26,30 @@ namespace MyStoreWinApp
         {
 
         }
-    }
-    private void FilterByCityAndCountry()
-    {
-        MemberObject member = new MemberObject();
-        List<MemberObject> Flist= mem
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void btCreate_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
