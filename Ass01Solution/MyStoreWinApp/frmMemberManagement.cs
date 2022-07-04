@@ -1,5 +1,4 @@
 ﻿using BusinessObject;
-using Data
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,7 +15,6 @@ namespace MyStoreWinApp
 {
     public partial class frmMemberManagement : Form
     {
-        IMemberRepository memberRepository = new MemberRepository();
         public frmMemberManagement()
         {
             InitializeComponent();
@@ -26,6 +24,7 @@ namespace MyStoreWinApp
         {
 
         }
+
 
         private void label1_Click(object sender, EventArgs e)
         {

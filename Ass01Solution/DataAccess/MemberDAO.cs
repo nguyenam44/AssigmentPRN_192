@@ -115,5 +115,11 @@ namespace DataAccess
                     throw new Exception("Member does not exsits!");
                 }
             }
+<<<<<<< HEAD
+
+        
+
+=======
+>>>>>>> f9741645e4400ee27e60ca14309eda4a6a085363
         }//MemberDAO class end 
     }//DataAccess namespace en

@@ -21,6 +21,15 @@ namespace MyStoreWinApp
 
         private void InitializeComponent()
         {
+
+            this.SuspendLayout();
+            // 
+            // frmLogin
+            // 
+            this.ClientSize = new System.Drawing.Size(278, 244);
+            this.Name = "frmLogin";
+            this.Load += new System.EventHandler(this.frmLogin_Load);
+            this.ResumeLayout(false);
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.lbEmail = new System.Windows.Forms.Label();
@@ -105,6 +114,7 @@ namespace MyStoreWinApp
         {
 
         }
+
 
         private void label1_Click(object sender, EventArgs e)
         {
