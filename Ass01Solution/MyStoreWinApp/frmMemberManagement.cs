@@ -12,18 +12,21 @@ using System.Windows.Forms;
 
 namespace MyStoreWinApp
 {
-    public partial class frmMemberManagement : Form
+    public partial class frmMemberManagements : Form
     {
         public bool isAdmin { get; set; }
         IMemberRepository memberRepository = new MemberRepository();
         //Create a data source
         BindingSource source;
-        public frmMemberManagement()
+
+        //----------------------------------------
+
+        public frmMemberManagements()
         {
             InitializeComponent();
         }
-
-        /*private void frmMemberManagement_Load(object sender, EventArgs e)
+        //----------------------------------------
+        private void frmMemberManagements_Load(object sender, EventArgs e)
         {
             if (isAdmin == false)
             {
@@ -48,14 +51,9 @@ namespace MyStoreWinApp
                 //Register this event to open the frmMemberDetail form that performs updating
                 dgvMemberList.CellDoubleClick += DgvMemberList_CellDoubleClick;
             }
-        }*/
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
-
-        /*private void DgvMemberList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        //----------------------------------------
+        private void DgvMemberList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             frmMemberDetails frmMemberDetails = new frmMemberDetails
 
@@ -73,7 +71,8 @@ namespace MyStoreWinApp
                 //Set focus member updated
                 source.Position = source.Count - 1;
             }
-        }*/
+        }
+        //Clear text on TextBoxes
         private void ClearText()
         {
             txtMemberID.Text = string.Empty;
@@ -83,6 +82,7 @@ namespace MyStoreWinApp
             cboCountry.Text = string.Empty;
             cboCity.Text = string.Empty;
         }
+        //-----------------------------------------------
         private MemberObject GetMemberObject()
         {
             MemberObject member = null;
@@ -161,54 +161,186 @@ namespace MyStoreWinApp
                 MessageBox.Show(ex.Message, "Load member list");
             }
         }
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        //------------------------------------------------------
+        private void btnLoad_Click(object sender, EventArgs e)
         {
+
+            LoadMemberList();
+
+
+        }
+        //-----------------------------------------------------
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            frmMemberDetails frmMemberDetails = new frmMemberDetails
+            {
+                Text = "Add member",
+                InsertOrUpdate = false,
+                MemberRepository = memberRepository
+            };
+            if (frmMemberDetails.ShowDialog() == DialogResult.OK)
+            {
+                LoadMemberList();
+                //Set focus member inserted
+                source.Position = source.Count - 1;
+            }
+        }
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var member = GetMemberObject();
+                memberRepository.DeleteMember(member.MemberID);
+                LoadMemberList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Delete a member");
+            }
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        private void LoadOneMember()
+        {
+            MemberObject member = new MemberObject();
+            var members = memberRepository.GetMembers();
+            try
+            {
+                foreach (var i in members)
+                {
+                    //The BindingSource omponent is designed to simplify
+                    //the process of binding controls to an underlying data source
+                    if (i.MemberName.Equals(txtSearch.Text))
+                    {
+                        source = new BindingSource();
+
+
+                        source.DataSource = memberRepository.GetMemberByID(i.MemberID);
+
+                        txtMemberID.DataBindings.Clear();
+                        txtMemberName.DataBindings.Clear();
+                        txtPassword.DataBindings.Clear();
+                        txtEmail.DataBindings.Clear();
+                        cboCountry.DataBindings.Clear();
+                        cboCity.DataBindings.Clear();
+
+                        txtMemberID.DataBindings.Add("Text", source, "MemberID");
+                        txtMemberName.DataBindings.Add("Text", source, "MemberName");
+                        txtPassword.DataBindings.Add("Text", source, "Password");
+                        txtEmail.DataBindings.Add("Text", source, "Email");
+                        cboCountry.DataBindings.Add("Text", source, "Country");
+                        cboCity.DataBindings.Add("Text", source, "City");
+
+
+                        dgvMemberList.DataSource = null;
+                        dgvMemberList.DataSource = source;
+                        break;
+                    }
+                    else if (i.MemberID.ToString().Equals(txtSearch.Text))
+                    {
+                        source = new BindingSource();
+
+
+                        source.DataSource = memberRepository.GetMemberByID(i.MemberID);
+
+                        txtMemberID.DataBindings.Clear();
+                        txtMemberName.DataBindings.Clear();
+                        txtPassword.DataBindings.Clear();
+                        txtEmail.DataBindings.Clear();
+                        cboCountry.DataBindings.Clear();
+                        cboCity.DataBindings.Clear();
+
+                        txtMemberID.DataBindings.Add("Text", source, "MemberID");
+                        txtMemberName.DataBindings.Add("Text", source, "MemberName");
+                        txtPassword.DataBindings.Add("Text", source, "Password");
+                        txtEmail.DataBindings.Add("Text", source, "Email");
+                        cboCountry.DataBindings.Add("Text", source, "Country");
+                        cboCity.DataBindings.Add("Text", source, "City");
+
+
+                        dgvMemberList.DataSource = null;
+                        dgvMemberList.DataSource = source;
+                        break;
+                    }
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Load member list");
+            }
+        }
+
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+
+            LoadOneMember();
+        }
+
+        private void FilterMember()
+        {
+
+            MemberObject member = new MemberObject();
+            List<MemberObject> filterList = memberRepository.GetMemberByCityAndCountry(cboSearchCity.Text, cboSearchCountry.Text);
+            try
+            {
+
+                if (filterList.Count == 0)
+                {
+                    MessageBox.Show("No member matched", "No result");
+                }
+                else if (filterList.Count != 0)
+                {
+                    source = new BindingSource();
+                    source.DataSource = filterList.OrderByDescending(member => member.MemberName);
+                    txtMemberID.DataBindings.Clear();
+                    txtMemberName.DataBindings.Clear();
+                    txtPassword.DataBindings.Clear();
+                    txtEmail.DataBindings.Clear();
+                    cboCountry.DataBindings.Clear();
+                    cboCity.DataBindings.Clear();
+
+                    txtMemberID.DataBindings.Add("Text", source, "MemberID");
+                    txtMemberName.DataBindings.Add("Text", source, "MemberName");
+                    txtPassword.DataBindings.Add("Text", source, "Password");
+                    txtEmail.DataBindings.Add("Text", source, "Email");
+                    cboCountry.DataBindings.Add("Text", source, "Country");
+                    cboCity.DataBindings.Add("Text", source, "City");
+
+
+                    dgvMemberList.DataSource = null;
+                    dgvMemberList.DataSource = source;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Load member list");
+            }
+        }
+
+
+
+        private void btnFind_Click(object sender, EventArgs e)
+        {
+            FilterMember();
+        }
+        private void cboSearchCity_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // searchCity= cboSearchCity.Text;
+        }
+
+        private void cboSearchCountry_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // searchCountry= cboSearchCountry.Text;
 
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void btCreate_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtSearch_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
     }
+
 }

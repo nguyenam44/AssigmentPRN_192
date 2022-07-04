@@ -17,15 +17,18 @@ namespace MyStoreWinApp
         private TextBox txtPassword;
 
         private MemberRepository memberRepository = new MemberRepository();
+
         public frmLogin()
         {
             InitializeComponent();
         }
 
+        
         private void frmLogin_Load(object sender, EventArgs e)
         {
 
         }
+
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -37,7 +40,7 @@ namespace MyStoreWinApp
 
         }
 
-       
+
 
         private void Login_Click(object sender, EventArgs e)
         {
@@ -95,5 +98,6 @@ namespace MyStoreWinApp
 
         }
         private void btnCancel_Click(object sender, EventArgs e) => this.Close();
+
     }
 }

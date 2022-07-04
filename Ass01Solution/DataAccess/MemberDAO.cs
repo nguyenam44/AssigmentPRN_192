@@ -17,6 +17,9 @@ namespace DataAccess
             new MemberObject{MemberID = 4, MemberName = "NamNguyen", Email = "namnvhse150925@fpt.edu.vn", City = "Ho Chi Minh", Country = "Viet Nam", Password = "nam123"},
             new MemberObject{MemberID = 5, MemberName = "NghiaLe", Email = "nghialhse150939@fpt.edu.vn", City = "Ho Chi Minh", Country = "Viet Nam", Password = "nghia123"}
         };
+
+
+
         //--------------------------------------------------------------------------------
         // SingletonPattern
         private static MemberDAO instance = null;
@@ -26,9 +29,9 @@ namespace DataAccess
         {
             get
             {
-                lock(instanceLock)
+                lock (instanceLock)
                 {
-                    if(instance == null)
+                    if (instance == null)
                     {
                         instance = new MemberDAO();
                     }
@@ -39,28 +42,39 @@ namespace DataAccess
         //--------------------------------------------------------------------------------
         //Get Member list
         public List<MemberObject> GetMemberList => MemberList;
+
         //--------------------------------------------------------------------------------
         //Get Member by ID
         public MemberObject GetMemberByID(int memberID)
         {
-            MemberObject member = null;
-            // Add code here
+            MemberObject member = MemberList.SingleOrDefault(pro => pro.MemberID == memberID);
             return member;
         }
         //--------------------------------------------------------------------------------
-        //Get Member by Name
-        public MemberObject GetMemberByName(string memberName)
+
+        //GetMember by Name
+        public MemberObject GetMemberByName(String memberName)
         {
-            //using LINQ to Object
             MemberObject member = MemberList.SingleOrDefault(pro => pro.MemberName == memberName);
             return member;
+
+        }
+        //GetMember by City and Country
+        public List<MemberObject> GetMemberByCityAndCountry(string city, string country)
+        {
+            List<MemberObject> memberList = new List<MemberObject>();
+            for (int i = 1; i <= MemberList.Count; i++)
+            {
+                if (MemberList[i - 1].City == city && MemberList[i - 1].Country == country) { memberList.Add(MemberList[i - 1]); }
+            }
+            return memberList;
         }
         //--------------------------------------------------------------------------------
         //Get Member by City or County
 
         //--------------------------------------------------------------------------------
         //Creat a new Member
-        public void AddNewmember(MemberObject member)
+        public void AddNewMember(MemberObject member)
         {
             MemberObject obj = GetMemberByID(member.MemberID);
             if (obj == null)
@@ -77,7 +91,7 @@ namespace DataAccess
         public void RemoveMember(int MemberID)
         {
             MemberObject obj = GetMemberByID(MemberID);
-            if(obj != null)
+            if (obj != null)
             {
                 MemberList.Remove(obj);
             }
@@ -89,6 +103,7 @@ namespace DataAccess
         //--------------------------------------------------------------------------------
         //Update a Member
         public void UpdateMember(MemberObject member)
+
         {
             MemberObject obj = GetMemberByID(member.MemberID);
             if (obj != null)
@@ -101,8 +116,5 @@ namespace DataAccess
                 throw new Exception("Member does not exsits!");
             }
         }
-        //--------------------------------------------------------------------------------
-
-
     }//MemberDAO class end 
 }//DataAccess namespace end

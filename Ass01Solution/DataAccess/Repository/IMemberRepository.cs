@@ -10,6 +10,7 @@ namespace DataAccess.Repository
     public interface IMemberRepository
     {
         IEnumerable<MemberObject> GetMembers();
+
         // Add InsertMember to interface
         void InsertMember(MemberObject member);
         //--------------------------------------
@@ -20,5 +21,11 @@ namespace DataAccess.Repository
         // Add DeleteMember to interface
         void DeleteMember(int memberID);
         //--------------------------------------
+        //Search Member By ID and Name
+        MemberObject GetMemberByID(int memberID);
+        MemberObject GetMemberByName(string memberName);
+        List<MemberObject> GetMemberByCityAndCountry(string country,string city);
+
+
     }
 }
