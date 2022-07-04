@@ -9,9 +9,11 @@ namespace DataAccess.Repository
 {
     public interface IMemberRepository
     {
+        IEnumerable<MemberObject> GetMembers();
         // Add InsertMember to interface
         void InsertMember(MemberObject member);
         //--------------------------------------
+
         // Add UpdateMember to interface
         void UpdateMember(MemberObject member);
         //--------------------------------------

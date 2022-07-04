@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "BusinessObject": {
+      "commandName": "Project"
+    },
+    "Profile 1": {
+      "commandName": "Project"
+    }
+  }
+}

@@ -11,7 +11,11 @@ namespace DataAccess
         //Init Members list
         private static List<MemberObject> MemberList = new List<MemberObject>
         {
-            //Add list of member here
+            new MemberObject{MemberID = 1, MemberName = "QuanNguyen", Email = "quannmse161529@fpt.edu.vn", City = "Ho Chi Minh", Country = "Viet Nam", Password = "QuanNM_0516"},
+            new MemberObject{MemberID = 2, MemberName = "PhucLe", Email = "phuclnse161514@fpt.edu.vn", City = "Ho Chi Minh", Country = "Viet Nam", Password = "phuc123"},
+            new MemberObject{MemberID = 3, MemberName = "HieuNguyen", Email = "hieunmse130445@fpt.edu.vn", City = "Ho Chi Minh", Country = "Viet Nam", Password = "hieu123"},
+            new MemberObject{MemberID = 4, MemberName = "NamNguyen", Email = "namnvhse150925@fpt.edu.vn", City = "Ho Chi Minh", Country = "Viet Nam", Password = "nam123"},
+            new MemberObject{MemberID = 5, MemberName = "NghiaLe", Email = "nghialhse150939@fpt.edu.vn", City = "Ho Chi Minh", Country = "Viet Nam", Password = "nghia123"}
         };
         //--------------------------------------------------------------------------------
         // SingletonPattern
@@ -34,7 +38,7 @@ namespace DataAccess
         }
         //--------------------------------------------------------------------------------
         //Get Member list
-
+        public List<MemberObject> GetMemberList => MemberList;
         //--------------------------------------------------------------------------------
         //Get Member by ID
         public MemberObject GetMemberByID(int memberID)
@@ -45,7 +49,12 @@ namespace DataAccess
         }
         //--------------------------------------------------------------------------------
         //Get Member by Name
-
+        public MemberObject GetMemberByName(string memberName)
+        {
+            //using LINQ to Object
+            MemberObject member = MemberList.SingleOrDefault(pro => pro.MemberName == memberName);
+            return member;
+        }
         //--------------------------------------------------------------------------------
         //Get Member by City or County
 
