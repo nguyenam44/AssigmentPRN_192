@@ -26,6 +26,7 @@ namespace DataAccess.Repository
         public MemberObject GetMemberByName(String memberName) => MemberDAO.Instance.GetMemberByName(memberName);
 
         public List<MemberObject> GetMemberByCityAndCountry(string country, string city)=>MemberDAO.Instance.GetMemberByCityAndCountry(country, city);
+        public MemberObject GetMemberByEmail(string email) => MemberDAO.Instance.GetMemberByEmail(email);
 
     }
 }

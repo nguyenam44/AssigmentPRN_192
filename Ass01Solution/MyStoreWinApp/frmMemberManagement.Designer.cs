@@ -62,7 +62,7 @@ namespace MyStoreWinApp
             "Viet Nam",
             "America",
             "United Kingdom"});
-            this.cboSearchCountry.Location = new System.Drawing.Point(142, 259);
+            this.cboSearchCountry.Location = new System.Drawing.Point(41, 260);
             this.cboSearchCountry.Name = "cboSearchCountry";
             this.cboSearchCountry.Size = new System.Drawing.Size(211, 28);
             this.cboSearchCountry.TabIndex = 19;
@@ -78,7 +78,7 @@ namespace MyStoreWinApp
             "Ha Noi",
             "Phu Quoc",
             "Vung Tau"});
-            this.cboSearchCity.Location = new System.Drawing.Point(414, 260);
+            this.cboSearchCity.Location = new System.Drawing.Point(459, 259);
             this.cboSearchCity.Name = "cboSearchCity";
             this.cboSearchCity.Size = new System.Drawing.Size(215, 28);
             this.cboSearchCity.TabIndex = 21;
@@ -234,6 +234,7 @@ namespace MyStoreWinApp
             this.dgvMemberList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvMemberList.Size = new System.Drawing.Size(777, 168);
             this.dgvMemberList.TabIndex = 16;
+            this.dgvMemberList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvMemberList_CellDoubleClick);
             // 
             // txtSearch
             // 
@@ -245,7 +246,7 @@ namespace MyStoreWinApp
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(695, 208);
+            this.btnSearch.Location = new System.Drawing.Point(694, 209);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(94, 29);
             this.btnSearch.TabIndex = 18;
@@ -305,7 +306,6 @@ namespace MyStoreWinApp
             this.Controls.Add(this.lbMemberID);
             this.Name = "frmMemberManagements";
             this.Text = "Member Management";
-            this.Load += new System.EventHandler(this.frmMemberManagements_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvMemberList)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

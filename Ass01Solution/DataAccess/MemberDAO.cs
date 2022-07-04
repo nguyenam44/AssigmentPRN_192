@@ -51,7 +51,13 @@ namespace DataAccess
             return member;
         }
         //--------------------------------------------------------------------------------
-
+        //Get Member by ID
+        public MemberObject GetMemberByEmail(string email)
+        {
+            MemberObject member = MemberList.SingleOrDefault(pro => pro.Email == email);
+            return member;
+        }
+        //--------------------------------------------------------------------------------
         //GetMember by Name
         public MemberObject GetMemberByName(String memberName)
         {

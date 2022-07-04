@@ -14,6 +14,7 @@ namespace MyStoreWinApp
 {
     public partial class frmMemberManagements : Form
     {
+        public string email { get; set; }
         public bool isAdmin { get; set; }
         IMemberRepository memberRepository = new MemberRepository();
         //Create a data source
@@ -24,33 +25,6 @@ namespace MyStoreWinApp
         public frmMemberManagements()
         {
             InitializeComponent();
-        }
-        //----------------------------------------
-        private void frmMemberManagements_Load(object sender, EventArgs e)
-        {
-            if (isAdmin == false)
-            {
-                btnDelete.Enabled = false;
-                btnNew.Enabled = false;
-
-                cboCity.Enabled = false;
-                cboCountry.Enabled = false;
-                txtEmail.Enabled = false;
-                txtMemberID.Enabled = false;
-                txtMemberName.Enabled = false;
-                txtPassword.Enabled = false;
-                btnDelete.Enabled = false;
-                btnFind.Enabled = false;
-                cboSearchCity.Enabled = false;
-                cboSearchCountry.Enabled = false;
-                dgvMemberList.CellDoubleClick += null;
-            }
-            else
-            {
-                btnDelete.Enabled = false;
-                //Register this event to open the frmMemberDetail form that performs updating
-                dgvMemberList.CellDoubleClick += DgvMemberList_CellDoubleClick;
-            }
         }
         //----------------------------------------
         private void DgvMemberList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -67,9 +41,17 @@ namespace MyStoreWinApp
             };
             if (frmMemberDetails.ShowDialog() == DialogResult.OK)
             {
-                LoadMemberList();
-                //Set focus member updated
-                source.Position = source.Count - 1;
+                if (isAdmin == true)
+                {
+                    LoadMemberList();
+                    //Set focus member updated
+                    source.Position = source.Count - 1;
+                }
+                else
+                {
+                    LoadMember();
+                    source.Position = source.Count - 1;
+                }
             }
         }
         //Clear text on TextBoxes
@@ -164,11 +146,55 @@ namespace MyStoreWinApp
         //------------------------------------------------------
         private void btnLoad_Click(object sender, EventArgs e)
         {
-
-            LoadMemberList();
+            if (isAdmin == true)
+            {
+                LoadMemberList();
+            }
+            else
+            {
+                LoadMember();
+            }
 
 
         }
+        private void LoadMember()
+        {
+
+            var member = memberRepository.GetMemberByEmail(email);
+
+            try
+            {
+                //The BindingSource omponent is designed to simplify
+                //the process of binding controls to an underlying data source
+                source = new BindingSource();
+                source.DataSource = member;
+                txtMemberID.DataBindings.Clear();
+                txtMemberName.DataBindings.Clear();
+                txtPassword.DataBindings.Clear();
+                txtEmail.DataBindings.Clear();
+                cboCountry.DataBindings.Clear();
+                cboCity.DataBindings.Clear();
+
+                txtMemberID.DataBindings.Add("Text", source, "MemberID");
+                txtMemberName.DataBindings.Add("Text", source, "MemberName");
+                txtPassword.DataBindings.Add("Text", source, "Password");
+                txtEmail.DataBindings.Add("Text", source, "Email");
+                cboCountry.DataBindings.Add("Text", source, "Country");
+                cboCity.DataBindings.Add("Text", source, "City");
+
+
+                dgvMemberList.DataSource = null;
+                dgvMemberList.DataSource = source;
+                
+                btnDelete.Enabled = false;
+                   
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Load member");
+            }
+        }
+
         //-----------------------------------------------------
         private void btnNew_Click(object sender, EventArgs e)
         {

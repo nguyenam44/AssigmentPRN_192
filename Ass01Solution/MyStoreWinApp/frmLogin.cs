@@ -65,11 +65,12 @@ namespace MyStoreWinApp
             bool canLog = false;
             foreach (var i in members)
             {
-                if (i.MemberName.Equals(txtEmail.Text) && i.Password.Equals(txtPassword.Text))
+                if (i.Email.Equals(txtEmail.Text) && i.Password.Equals(txtPassword.Text))
                 {
                     frmMemberManagements frm = new frmMemberManagements()
                     {
-                        isAdmin = false
+                        isAdmin = false,
+                        email = txtEmail.Text,
                     };
                     frm.ShowDialog();
                     canLog = true;
@@ -93,7 +94,7 @@ namespace MyStoreWinApp
             }
             if (canLog == false)
             {
-                MessageBox.Show("Can not find member", "Error");
+                MessageBox.Show("Wrong Email or Password. Please try again!", "Error");
             }
 
         }
