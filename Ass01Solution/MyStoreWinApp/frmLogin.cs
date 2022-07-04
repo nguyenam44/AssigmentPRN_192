@@ -19,6 +19,7 @@ namespace MyStoreWinApp
             InitializeComponent();
         }
 
+<<<<<<< Updated upstream
         private void InitializeComponent()
         {
 
@@ -109,6 +110,8 @@ namespace MyStoreWinApp
             this.PerformLayout();
 
         }
+=======
+>>>>>>> Stashed changes
 
         private void frmLogin_Load(object sender, EventArgs e)
         {
@@ -135,10 +138,59 @@ namespace MyStoreWinApp
         {
             string json = string.Empty;
 
-            using (StreamReader reader = new StreamReader("appsetting.json")) 
+            using (StreamReader reader = new StreamReader("appsettings.json"))
             {
                 json = reader.ReadToEnd();
             }
+<<<<<<< Updated upstream
+=======
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            // convert json string to dynamic type
+            var obj = jss.Deserialize<dynamic>(json);
+            // get contents
+
+            var admin = new MemberObject
+            {
+                Email = obj["DefaultAccount"]["Email"],
+                Password = obj["DefaultAccount"]["password"]
+            };
+
+            var members = memberRepository.GetMembers();
+            bool canLog = false;
+            foreach (var i in members)
+            {
+                if (i.Email.Equals(txtEmail.Text) && i.Password.Equals(txtPassword.Text))
+                {
+                    frmMemberManagements frm = new frmMemberManagements()
+                    {
+                        isAdmin = false,
+                        email = txtEmail.Text,
+                    };
+                    frm.ShowDialog();
+                    canLog = true;
+                    this.Close();
+
+
+                }
+                else if (admin.Email.Equals(txtEmail.Text) && admin.Password.Equals(txtPassword.Text))
+                {
+                    frmMemberManagements frm = new frmMemberManagements()
+                    {
+                        isAdmin = true
+                    };
+                    frm.ShowDialog();
+
+                    this.Close();
+
+
+                }
+
+            }
+            if (canLog == false)
+            {
+                MessageBox.Show("Wrong Email or Password. Please try again!", "Error");
+            }
+>>>>>>> Stashed changes
 
             
         }
