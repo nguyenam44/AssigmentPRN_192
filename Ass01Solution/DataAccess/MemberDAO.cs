@@ -55,6 +55,7 @@ namespace DataAccess
         {
             MemberObject member = MemberList.SingleOrDefault(pro => pro.MemberName == memberName);
             return member;
+
         }
         //GetMember by City and Country
         public List<MemberObject> GetMemberByCityAndCountry(string city,string country)
@@ -101,6 +102,7 @@ namespace DataAccess
             //--------------------------------------------------------------------------------
             //Update a Member
             public void UpdateMember(MemberObject member)
+
             {
                 MemberObject obj = GetMemberByID(member.MemberID);
                 if (obj != null)
@@ -113,8 +115,11 @@ namespace DataAccess
                     throw new Exception("Member does not exsits!");
                 }
             }
+<<<<<<< HEAD
 
         
 
+=======
+>>>>>>> f9741645e4400ee27e60ca14309eda4a6a085363
         }//MemberDAO class end 
     }//DataAccess namespace en
