@@ -113,20 +113,6 @@ namespace DataAccess
                     throw new Exception("Member does not exsits!");
                 }
             }
-            //--------------------------------------------------------------------------------
-            //Delete a Member
-            public void deleteMember(int MemberID)
-            {
-                MemberObject mem = GetMemberByID(MemberID);
-                if (mem != null)
-                {
-                    MemberList.Remove(mem);
-                }
-                else
-                {
-                    throw new Exception("Member does not exists!");
-                }
-            }
 
         
 

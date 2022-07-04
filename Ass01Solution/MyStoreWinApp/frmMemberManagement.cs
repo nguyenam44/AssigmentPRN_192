@@ -1,5 +1,4 @@
 ﻿using BusinessObject;
-using Data
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,7 +15,6 @@ namespace MyStoreWinApp
 {
     public partial class frmMemberManagement : Form
     {
-        IMemberRepository memberRepository = new MemberRepository();
         public frmMemberManagement()
         {
             InitializeComponent();
@@ -29,7 +27,6 @@ namespace MyStoreWinApp
     }
     private void FilterByCityAndCountry()
     {
-        MemberObject member = new MemberObject();
-        List<MemberObject> Flist= mem
+  
     }
 }
