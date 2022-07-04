@@ -23,7 +23,7 @@ namespace MyStoreWinApp
             InitializeComponent();
         }
 
-        
+
         private void frmLogin_Load(object sender, EventArgs e)
         {
 
@@ -46,7 +46,7 @@ namespace MyStoreWinApp
         {
             string json = string.Empty;
 
-            using (StreamReader reader = new StreamReader("appsetting.json")) 
+            using (StreamReader reader = new StreamReader("appsettings.json"))
             {
                 json = reader.ReadToEnd();
             }
@@ -89,7 +89,7 @@ namespace MyStoreWinApp
                     this.Close();
 
 
-                }              
+                }
 
             }
             if (canLog == false)
