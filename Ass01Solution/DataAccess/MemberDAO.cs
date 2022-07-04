@@ -14,8 +14,9 @@ namespace DataAccess
             new MemberObject{MemberID = 1, MemberName = "QuanNguyen", Email = "quannmse161529@fpt.edu.vn", City = "Ho Chi Minh", Country = "Viet Nam", Password = "QuanNM_0516"},
             new MemberObject{MemberID = 2, MemberName = "PhucLe", Email = "phuclnse161514@fpt.edu.vn", City = "Ho Chi Minh", Country = "Viet Nam", Password = "phuc123"},
             new MemberObject{MemberID = 3, MemberName = "HieuNguyen", Email = "hieunmse130445@fpt.edu.vn", City = "Ho Chi Minh", Country = "Viet Nam", Password = "hieu123"},
-            new MemberObject{MemberID = 4, MemberName = "NamNguyen", Email = "namnvhse150925@fpt.edu.vn", City = "Ho Chi Minh", Country = "Viet Nam", Password = "nam123"},
-            new MemberObject{MemberID = 5, MemberName = "NghiaLe", Email = "nghialhse150939@fpt.edu.vn", City = "Ho Chi Minh", Country = "Viet Nam", Password = "nghia123"}
+            new MemberObject{MemberID = 4, MemberName = "NamNguyen", Email = "namnvhse150925@fpt.edu.vn", City = "Da Nang", Country = "Viet Nam", Password = "nam123"},
+            new MemberObject{MemberID = 5, MemberName = "NghiaLe", Email = "nghialhse150939@fpt.edu.vn", City = "Ho Chi Minh", Country = "Viet Nam", Password = "nghia123"},
+            new MemberObject{MemberID = 6, MemberName = "Leonel Messi", Email = "Messi@fpt.edu.vn", City = "Buenos Aires", Country = "Arghentina", Password = "messi123"}
         };
 
 
@@ -75,8 +76,28 @@ namespace DataAccess
             }
             return memberList;
         }
+
         //--------------------------------------------------------------------------------
         //Get Member by City or County
+        public List<MemberObject> GetMemberByCity(string city)
+        {
+            List<MemberObject> memberList = new List<MemberObject>();
+            for (int i = 1; i <= MemberList.Count; i++)
+            {
+                if (MemberList[i - 1].City == city) { memberList.Add(MemberList[i - 1]); }
+            }
+            return memberList;
+        }
+        public List<MemberObject> GetMemberByCountry(string country)
+        {
+            List<MemberObject> memberList = new List<MemberObject>();
+            for (int i = 1; i <= MemberList.Count; i++)
+            {
+                if (MemberList[i - 1].Country == country) { memberList.Add(MemberList[i - 1]); }
+            }
+            return memberList;
+        }
+
 
         //--------------------------------------------------------------------------------
         //Creat a new Member

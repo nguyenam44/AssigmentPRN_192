@@ -100,5 +100,9 @@ namespace MyStoreWinApp
         }
         private void btnCancel_Click(object sender, EventArgs e) => this.Close();
 
+        private void lbLogin_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

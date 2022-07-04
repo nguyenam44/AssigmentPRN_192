@@ -33,7 +33,7 @@
             // 
             this.txtEmail.Location = new System.Drawing.Point(217, 183);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(302, 27);
+            this.txtEmail.Size = new System.Drawing.Size(302, 31);
             this.txtEmail.TabIndex = 3;
             // 
             // txtPassword
@@ -41,7 +41,7 @@
             this.txtPassword.Location = new System.Drawing.Point(217, 230);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(302, 27);
+            this.txtPassword.Size = new System.Drawing.Size(302, 31);
             this.txtPassword.TabIndex = 4;
             // 
             // lbEmail
@@ -49,7 +49,7 @@
             this.lbEmail.AutoSize = true;
             this.lbEmail.Location = new System.Drawing.Point(97, 186);
             this.lbEmail.Name = "lbEmail";
-            this.lbEmail.Size = new System.Drawing.Size(46, 20);
+            this.lbEmail.Size = new System.Drawing.Size(54, 25);
             this.lbEmail.TabIndex = 1;
             this.lbEmail.Text = "Email";
             // 
@@ -58,10 +58,9 @@
             this.lbPassword.AutoSize = true;
             this.lbPassword.Location = new System.Drawing.Point(73, 237);
             this.lbPassword.Name = "lbPassword";
-            this.lbPassword.Size = new System.Drawing.Size(70, 20);
+            this.lbPassword.Size = new System.Drawing.Size(87, 25);
             this.lbPassword.TabIndex = 2;
             this.lbPassword.Text = "Password";
-            
             // 
             // lbLogin
             // 
@@ -69,9 +68,10 @@
             this.lbLogin.Font = new System.Drawing.Font("Segoe UI", 40F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lbLogin.Location = new System.Drawing.Point(193, 50);
             this.lbLogin.Name = "lbLogin";
-            this.lbLogin.Size = new System.Drawing.Size(364, 89);
+            this.lbLogin.Size = new System.Drawing.Size(435, 106);
             this.lbLogin.TabIndex = 0;
             this.lbLogin.Text = "Login Page";
+            this.lbLogin.Click += new System.EventHandler(this.lbLogin_Click);
             // 
             // btnLog
             // 

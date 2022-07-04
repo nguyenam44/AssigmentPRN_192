@@ -24,7 +24,9 @@ namespace DataAccess.Repository
         //Search Member By ID and Name
         MemberObject GetMemberByID(int memberID);
         MemberObject GetMemberByName(string memberName);
-        List<MemberObject> GetMemberByCityAndCountry(string country,string city);
+        List<MemberObject> GetMemberByCity(string city);
+        List<MemberObject> GetMemberByCountry(string country);
+        List<MemberObject> GetMemberByCityAndCountry(string city, string country);
         MemberObject GetMemberByEmail(string email);
 
     }

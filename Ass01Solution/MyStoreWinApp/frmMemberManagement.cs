@@ -71,12 +71,12 @@ namespace MyStoreWinApp
                 {
                     LoadMemberList();
                     //Set focus member updated
-                    source.Position = source.Count - 1;
+                    source.Position = source.Count-1;
                 }
                 else
                 {
                     LoadMember();
-                    source.Position = source.Count - 1;
+                    /*source.Position = source.Count - 1;*/
                 }
             }
         }
@@ -334,11 +334,11 @@ namespace MyStoreWinApp
             LoadOneMember();
         }
 
-        private void FilterMember()
+        private void FilterMemberByCity()
         {
 
             MemberObject member = new MemberObject();
-            List<MemberObject> filterList = memberRepository.GetMemberByCityAndCountry(cboSearchCity.Text, cboSearchCountry.Text);
+            List<MemberObject> filterList = memberRepository.GetMemberByCity(cboSearchCity.Text);
             try
             {
 
@@ -376,11 +376,102 @@ namespace MyStoreWinApp
             }
         }
 
+        private void FilterMemberByCountry()
+        {
 
+            MemberObject member = new MemberObject();
+            List<MemberObject> filterList = memberRepository.GetMemberByCountry(cboSearchCountry.Text);
+            try
+            {
+
+                if (filterList.Count == 0)
+                {
+                    MessageBox.Show("No member matched", "No result");
+                }
+                else if (filterList.Count != 0)
+                {
+                    source = new BindingSource();
+                    source.DataSource = filterList.OrderByDescending(member => member.MemberName);
+                    txtMemberID.DataBindings.Clear();
+                    txtMemberName.DataBindings.Clear();
+                    txtPassword.DataBindings.Clear();
+                    txtEmail.DataBindings.Clear();
+                    cboCountry.DataBindings.Clear();
+                    cboCity.DataBindings.Clear();
+
+                    txtMemberID.DataBindings.Add("Text", source, "MemberID");
+                    txtMemberName.DataBindings.Add("Text", source, "MemberName");
+                    txtPassword.DataBindings.Add("Text", source, "Password");
+                    txtEmail.DataBindings.Add("Text", source, "Email");
+                    cboCountry.DataBindings.Add("Text", source, "Country");
+                    cboCity.DataBindings.Add("Text", source, "City");
+
+
+                    dgvMemberList.DataSource = null;
+                    dgvMemberList.DataSource = source;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Load member list");
+            }
+        }
+        private void FilterMemberByCityAndCountry()
+        {
+
+            MemberObject member = new MemberObject();
+            List<MemberObject> filterList = memberRepository.GetMemberByCityAndCountry(cboSearchCity.Text,cboSearchCountry.Text);
+            try
+            {
+
+                if (filterList.Count == 0)
+                {
+                    MessageBox.Show("No member matched", "No result");
+                }
+                else if (filterList.Count != 0)
+                {
+                    source = new BindingSource();
+                    source.DataSource = filterList.OrderByDescending(member => member.MemberName);
+                    txtMemberID.DataBindings.Clear();
+                    txtMemberName.DataBindings.Clear();
+                    txtPassword.DataBindings.Clear();
+                    txtEmail.DataBindings.Clear();
+                    cboCountry.DataBindings.Clear();
+                    cboCity.DataBindings.Clear();
+
+                    txtMemberID.DataBindings.Add("Text", source, "MemberID");
+                    txtMemberName.DataBindings.Add("Text", source, "MemberName");
+                    txtPassword.DataBindings.Add("Text", source, "Password");
+                    txtEmail.DataBindings.Add("Text", source, "Email");
+                    cboCountry.DataBindings.Add("Text", source, "Country");
+                    cboCity.DataBindings.Add("Text", source, "City");
+
+
+                    dgvMemberList.DataSource = null;
+                    dgvMemberList.DataSource = source;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Load member list");
+            }
+        }
 
         private void btnFind_Click(object sender, EventArgs e)
         {
-            FilterMember();
+            if (cboSearchCountry.Text == "Country" && cboSearchCity.Text != "City")
+            {
+                FilterMemberByCity();
+            }else if(cboSearchCountry.Text != "Country" && cboSearchCity.Text == "City")
+            {
+                FilterMemberByCountry();
+            }
+            else
+            {
+                FilterMemberByCityAndCountry();
+            }
         }
         private void cboSearchCity_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -390,6 +481,11 @@ namespace MyStoreWinApp
         private void cboSearchCountry_SelectedIndexChanged(object sender, EventArgs e)
         {
             // searchCountry= cboSearchCountry.Text;
+
+        }
+
+        private void dgvMemberList_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
         }
     }
