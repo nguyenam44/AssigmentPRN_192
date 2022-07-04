@@ -67,7 +67,7 @@ namespace MyStoreWinApp
             {
                 if (i.MemberName.Equals(txtEmail.Text) && i.Password.Equals(txtPassword.Text))
                 {
-                    frmMemberManagement frm = new frmMemberManagement()
+                    frmMemberManagements frm = new frmMemberManagements()
                     {
                         isAdmin = false
                     };
@@ -79,7 +79,7 @@ namespace MyStoreWinApp
                 }
                 else if (admin.Email.Equals(txtEmail.Text) && admin.Password.Equals(txtPassword.Text))
                 {
-                    frmMemberManagement frm = new frmMemberManagement()
+                    frmMemberManagements frm = new frmMemberManagements()
                     {
                         isAdmin = true
                     };
