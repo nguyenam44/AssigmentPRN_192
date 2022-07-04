@@ -58,68 +58,62 @@ namespace DataAccess
 
         }
         //GetMember by City and Country
-        public List<MemberObject> GetMemberByCityAndCountry(string city,string country)
+        public List<MemberObject> GetMemberByCityAndCountry(string city, string country)
         {
             List<MemberObject> memberList = new List<MemberObject>();
             for (int i = 1; i <= MemberList.Count; i++)
             {
-                if(MemberList[i-1].City == city && MemberList[i-1].Country == country) { memberList.Add(MemberList[i-1]); }
+                if (MemberList[i - 1].City == city && MemberList[i - 1].Country == country) { memberList.Add(MemberList[i - 1]); }
             }
             return memberList;
         }
 
-            //--------------------------------------------------------------------------------
-            //Get Member by City or County
+        //--------------------------------------------------------------------------------
+        //Get Member by City or County
 
         //--------------------------------------------------------------------------------
         //Creat a new Member
-            public void AddNewMember(MemberObject member)
+        public void AddNewMember(MemberObject member)
+        {
+            MemberObject obj = GetMemberByID(member.MemberID);
+            if (obj == null)
             {
-                MemberObject obj = GetMemberByID(member.MemberID);
-                if (obj == null)
-                {
-                    MemberList.Add(member);
-                }
-                else
-                {
-                    throw new Exception("Member already exsitsed!");
-                }
+                MemberList.Add(member);
             }
-            //--------------------------------------------------------------------------------
-            //Remove a Member
-            public void RemoveMember(int MemberID)
+            else
             {
-                MemberObject obj = GetMemberByID(MemberID);
-                if (obj != null)
-                {
-                    MemberList.Remove(obj);
-                }
-                else
-                {
-                    throw new Exception("Member does not exsits!");
-                }
+                throw new Exception("Member already exsitsed!");
             }
-            //--------------------------------------------------------------------------------
-            //Update a Member
-            public void UpdateMember(MemberObject member)
-
+        }
+        //--------------------------------------------------------------------------------
+        //Remove a Member
+        public void RemoveMember(int MemberID)
+        {
+            MemberObject obj = GetMemberByID(MemberID);
+            if (obj != null)
             {
-                MemberObject obj = GetMemberByID(member.MemberID);
-                if (obj != null)
-                {
-                    var index = MemberList.IndexOf(obj);
-                    MemberList[index] = member;
-                }
-                else
-                {
-                    throw new Exception("Member does not exsits!");
-                }
+                MemberList.Remove(obj);
             }
-<<<<<<< HEAD
+            else
+            {
+                throw new Exception("Member does not exsits!");
+            }
+        }
+        //--------------------------------------------------------------------------------
+        //Update a Member
+        public void UpdateMember(MemberObject member)
 
-        
-
-=======
->>>>>>> f9741645e4400ee27e60ca14309eda4a6a085363
-        }//MemberDAO class end 
-    }//DataAccess namespace en
+        {
+            MemberObject obj = GetMemberByID(member.MemberID);
+            if (obj != null)
+            {
+                var index = MemberList.IndexOf(obj);
+                MemberList[index] = member;
+            }
+            else
+            {
+                throw new Exception("Member does not exsits!");
+            }
+        }
+    }//MemberDAO class end 
+}//DataAccess namespace end
