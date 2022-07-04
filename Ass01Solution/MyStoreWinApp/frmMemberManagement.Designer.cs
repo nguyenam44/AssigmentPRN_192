@@ -306,6 +306,7 @@ namespace MyStoreWinApp
             this.Controls.Add(this.lbMemberID);
             this.Name = "frmMemberManagements";
             this.Text = "Member Management";
+            this.Load += new System.EventHandler(this.frmMemberManagements_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvMemberList)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

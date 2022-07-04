@@ -58,10 +58,11 @@ namespace MyStoreWinApp
                 {
                     MemberRepository.UpdateMember(member);
                 }
+                this.Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, InsertOrUpdate == false ? "Add a new car" : "Update a car");
+                MessageBox.Show(ex.Message, InsertOrUpdate == false ? "Add" : "Update");
             }
         }
         private void btnCancel_Click(object sender, EventArgs e) => Close();

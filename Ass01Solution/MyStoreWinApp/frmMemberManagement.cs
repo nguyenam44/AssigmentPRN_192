@@ -27,6 +27,32 @@ namespace MyStoreWinApp
             InitializeComponent();
         }
         //----------------------------------------
+        private void frmMemberManagements_Load(object sender, EventArgs e)
+        {
+            if (isAdmin == false)
+            {
+                btnDelete.Enabled = false;
+                btnNew.Enabled = false;
+
+                cboCity.Enabled = false;
+                cboCountry.Enabled = false;
+                txtEmail.Enabled = false;
+                txtMemberID.Enabled = false;
+                txtMemberName.Enabled = false;
+                txtPassword.Enabled = false;
+                btnFind.Enabled = false;
+                cboSearchCity.Enabled = false;
+                cboSearchCountry.Enabled = false;
+                dgvMemberList.CellDoubleClick += DgvMemberList_CellDoubleClick;
+            }
+            else
+            {
+                btnDelete.Enabled = false;
+                //Register this event to open the frmMemberDetail form that performs updating
+                dgvMemberList.CellDoubleClick += DgvMemberList_CellDoubleClick;
+            }
+        }
+        //----------------------------------------
         private void DgvMemberList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             frmMemberDetails frmMemberDetails = new frmMemberDetails
@@ -366,7 +392,6 @@ namespace MyStoreWinApp
             // searchCountry= cboSearchCountry.Text;
 
         }
-
     }
 
 }
